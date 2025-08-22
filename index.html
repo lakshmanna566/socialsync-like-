@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SocialSync Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .platform-icon { cursor: pointer; transition: all 0.2s; }
+    .platform-icon.selected { border: 2px solid #3b82f6; border-radius: 12px; background: #eff6ff; }
+    .image-preview { max-width: 120px; max-height: 120px; object-fit: cover; margin: 5px; }
+    .connect-btn { font-size: 0.7rem; padding: 2px 6px; margin-top: 2px; border: 1px solid #3b82f6; color: #3b82f6; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+  <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6">
+    <h1 class="text-2xl font-bold mb-6">🚀 SocialSync Dashboard</h1>
+
+    <!-- Platform Selection -->
+    <h2 class="font-semibold mb-2">Select Platforms</h2>
+    <div class="flex gap-6 mb-6">
+      <div class="flex flex-col items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-12 h-12 platform-icon" data-platform="Facebook">
+        <button class="connect-btn">Connect</button>
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="X" class="w-12 h-12 platform-icon" data-platform="X">
+        <button class="connect-btn">Connect</button>
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="w-12 h-12 platform-icon" data-platform="Instagram">
+        <button class="connect-btn">Connect</button>
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="w-12 h-12 platform-icon" data-platform="LinkedIn">
+        <button class="connect-btn">Connect</button>
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" class="w-12 h-12 platform-icon" data-platform="YouTube">
+        <button class="connect-btn">Connect</button>
+      </div>
+    </div>
+
+    <!-- Quill Editor -->
+    <h2 class="font-semibold mb-2">Write Post</h2>
+    <div id="editor-container" class="h-40 mb-6"></div>
+
+    <!-- File Upload -->
+    <h2 class="font-semibold mb-2">Upload Media</h2>
+    <div id="dragFileArea" class="border-2 border-dashed rounded-lg p-6 text-center mb-4 cursor-pointer bg-gray-50">
+      <p class="text-gray-500">Drag & Drop or Click to Upload</p>
+      <input type="file" id="fileInput" multiple accept="image/*,video/*" class="hidden">
+    </div>
+    <div id="mediaPreview" class="flex flex-wrap hidden"></div>
+
+    <!-- Schedule -->
+    <h2 class="font-semibold mb-2">Schedule Post</h2>
+    <input id="scheduleDateTime" class="border rounded-lg p-2 mb-6 w-full" placeholder="Select date and time">
+
+    <!-- Notifications -->
+    <h2 class="font-semibold mb-2">Notifications</h2>
+    <div class="mb-2"><label><input type="checkbox" id="emailNotification"> Email</label></div>
+    <div id="emailInputContainer" class="hidden mb-2"><input type="email" placeholder="Enter Email" class="border p-2 rounded w-full"></div>
+    <div class="mb-2"><label><input type="checkbox" id="smsNotification"> SMS</label></div>
+    <div id="phoneInputContainer" class="hidden mb-4"><input type="tel" placeholder="Enter Phone" class="border p-2 rounded w-full"></div>
+
+    <!-- Post Now Button -->
+    <button id="postNowBtn" class="bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2">
+      <span id="postBtnText">Post Now</span>
+      <svg id="postBtnIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M5 5h7v14H5z" /></svg>
+      <span id="postBtnLoader" class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/quill/dist/quill.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="script.js"></script>
+</body>
+</html>
